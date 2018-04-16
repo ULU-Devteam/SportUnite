@@ -1,0 +1,53 @@
+﻿@model SportUnite.Domain.Models.SportComplex
+
+@{
+    Layout = "_SidebarLayout";
+
+}
+
+<div class="row">
+    <h3>Sportcomplex wijzigen @Model.Name </h3>
+    <a asp-action="SportComplex">Terug naar alle sportcomplexen</a>
+
+    <form class="form-horizontal" asp-action="UpdateSportComplex" method="post">
+        @Html.HiddenFor(m => m.SportComplexId, Model.SportComplexId)
+        @Html.HiddenFor(m => m.AddressId, Model.AddressId)
+        @Html.HiddenFor(m => m.Address.AddressId, Model.Address.AddressId)
+        <fieldset>
+            <div class="form-group edit-table-body">
+                <label class="col-md-4 edit-table-header">Naam sportcomplex: </label>
+                <div class="col-md-7">
+                    <input value="@Model.Name" class="form-control input-md" asp-for="Name" required="">
+                    <span asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="form-group edit-table-body">
+                <label class="col-md-4 edit-table-header">Adres: </label>
+                <div class="col-md-5 ">
+                    <input value="@Model.Address.Street" class="form-control input-md" asp-for="Address.Street">
+                    <span asp-validation-for="Address.Street"></span>
+                </div>
+                <div class="col-md-2">
+                    <input value="@Model.Address.HouseNumber" class="form-control input-md" asp-for="Address.HouseNumber" required="">
+                    <span asp-validation-for="Address.HouseNumber"></span>
+                </div>
+            </div>
+            <div class="form-group edit-table-body">
+                <label class="col-md-4 edit-table-header"><br /></label>
+                <div class="col-md-2">
+                    <input value="@Model.Address.PostalCode" class="form-control input-md" asp-for="Address.PostalCode" required="">
+                    <span asp-validation-for="Address.PostalCode"></span>
+                </div>
+                <div class="col-md-5">
+                    <input value="@Model.Address.City" class="form-control input-md" asp-for="Address.City" required="">
+                    <span asp-validation-for="Address.City"></span>
+                </div>
+            </div>
+        </fieldset>
+        <div class="text-center">
+            <button class="edit-table btn blue-button" type="submit">
+                WIJZIGEN
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,52 @@
+﻿@model SportUnite.Domain.Models.SportComplex
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Sportcomplex toevoegen </h3>
+	<a asp-action="SportComplex">Terug naar alle sportcomplexen</a>
+
+	<form class="form-horizontal" asp-action="AddSportComplex">
+		<fieldset>
+
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header">Naam sporthalcomplex: </label>
+				<div class="col-md-7">
+					<input placeholder="Naam" class="form-control input-md" required="" asp-for="Name">
+					<span asp-validation-for="Name"></span>
+				</div>
+			</div>
+
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header">Adres: </label>
+				<div class="col-md-5 ">
+					<input placeholder="Straat" class="form-control input-md" asp-for="Address.Street">
+					<span asp-validation-for="Address.Street"></span>
+				</div>
+				<div class="col-md-2">
+					<input placeholder="Huisnummer" class="form-control input-md" required type="number" min="0" asp-for="Address.HouseNumber">
+					<span asp-validation-for="Address.HouseNumber"></span>
+				</div>
+			</div>
+
+
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header"><br /></label>
+				<div class="col-md-2">
+					<input placeholder="Postcode" class="form-control input-md" required="" asp-for="Address.PostalCode">
+					<span asp-validation-for="Address.PostalCode"></span>
+				</div>
+				<div class="col-md-5">
+					<input placeholder="Plaats" class="form-control input-md" required="" asp-for="Address.City">
+					<span asp-validation-for="Address.City"></span>
+				</div>
+			</div>
+		</fieldset>
+		<div class="text-center">
+			<button class="edit-table btn blue-button" type="submit">
+				TOEVOEGEN
+			</button>
+		</div>
+	</form>
+</div>

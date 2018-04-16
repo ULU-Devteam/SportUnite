@@ -1,0 +1,63 @@
+﻿@model DashboardViewModel
+@{
+	Layout = "_AdminLayout";
+}
+
+<div class="row">
+	@if (User.IsInRole("Administrator"))
+	{
+		<h3>Overzicht Adminpaneel</h3>
+		<div class="row">
+			<div class="col-md-6">
+				<h4>Recente Facturen</h4>
+				<table class="table table-sm table-striped">
+
+					<thead>
+						<tr>
+							<th>Naam</th>
+							<th>Winst</th>
+							<th>Datum</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var i in Model.Invoices)
+						{
+							<tr>
+								<td class="main-table">@i.Name</td>
+								<td class="main-table">€@i.Profit</td>
+								<td class="main-table">@string.Format("{0:d}", i.Date)</td>
+								<td>
+									<button class="blue-button" type="submit" onclick="location.href = '@Url.Action("DetailInvoice", "Invoice", i)'" method="get">BEKIJKEN</button>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<h4>Recente Reserveringen</h4>
+				<table class="table table-sm table-stripedn">
+
+					<thead>
+						<tr>
+							<th>Contactpersoon</th>
+							<th>Uren</th>
+							<th>Event naam</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var r in Model.Reservations)
+						{
+							<tr>
+								<td>@r.Name</td>
+								<td>@r.HoursAmount</td>
+								<td>@r.Event.Name</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+            }
+</div>

@@ -1,0 +1,148 @@
+
+<div class="col-md-offset-2 col-md-8 row leftbg">
+
+  <h2 class="text-center te">Registreren</h2>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group col-md-10">
+      <label for="name">Naam:</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        class="form-control"
+        placeholder="Naam">
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="age">Leeftijd:</label>
+      <input
+        type="number"
+        id="age"
+        formControlName="age"
+        class="form-control"
+        placeholder="Jaar"
+        min="0"
+        step="1">
+    </div>
+
+
+    <div class="col-md-12"
+         *ngIf="!signupForm.get('name').valid && signupForm.get('name').touched">
+      <p>Vul naam in!</p>
+    </div>
+    <div class="col-md-12"
+
+         *ngIf="!signupForm.get('age').valid && signupForm.get('age').touched">
+      <p>Vul leeftijd in!</p>
+    </div>
+
+    <div class="form-group col-md-12">
+      <label for="email">Email:</label>
+      <input
+        type="text"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        placeholder="Email">
+    </div>
+
+
+    <div class="col-md-12"
+
+         *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">
+      <p>Vul email in!</p>
+    </div>
+
+    <div class="form-group col-md-12">
+      <label for="city">Woonplaats:</label>
+      <input
+        type="text"
+        id="city"
+        formControlName="city"
+        class="form-control"
+        placeholder="Woonplaats">
+    </div>
+
+
+    <div class="col-md-12"
+
+         *ngIf="!signupForm.get('city').valid && signupForm.get('city').touched">
+      <p>Vul stad in!</p>
+    </div>
+
+
+    <div class="form-group col-md-12">
+      <label for="usernameR">Gebruikersnaam:</label>
+      <input
+        type="text"
+        id="usernameR"
+        formControlName="usernameR"
+        class="form-control"
+        placeholder="Gebruikersnaam">
+    </div>
+
+
+    <div class="col-md-12"
+         *ngIf="!signupForm.get('usernameR').valid && signupForm.get('usernameR').touched">
+      <p>Vul gebruikersnaam in!</p>
+    </div>
+    <div class="col-md-12"
+
+         *ngIf="usernameExist">
+      <p>Gebruikersnaam bestaat al.</p>
+    </div>
+
+    <div class="form-group col-md-12">
+      <label for="passwordR">Wachtwoord:</label>
+      <input
+        type="password"
+        id="passwordR"
+        formControlName="passwordR"
+        class="form-control"
+        placeholder="Wachtwoord">
+    </div>
+
+
+    <div class="col-md-12"
+
+         *ngIf="!signupForm.get('passwordR').valid && signupForm.get('passwordR').touched">
+      <p>Vul wachtwoord in!</p>
+    </div>
+
+
+    <div class="form-group col-md-12">
+      <label for="repeatpassword">Herhaal Wachtwoord:</label>
+      <input
+        type="password"
+        id="repeatpassword"
+        formControlName="repeatpassword"
+        class="form-control"
+        placeholder="Herhaal Wachtwoord">
+    </div>
+
+
+    <div class="col-md-12"
+
+         *ngIf="!signupForm.get('repeatpassword').valid && signupForm.get('repeatpassword').touched">
+      <p>Vul herhaal wachtwoord in!</p>
+    </div>
+
+
+    <div class="col-md-12"
+
+         *ngIf="repeatPasswordCheck && signupForm.get('repeatpassword').dirty">
+      <p>Wachtwoorden komen niet overheen.</p>
+    </div>
+
+    <div class="col-md-12">
+      <button class="btn btn-sport btn-block bpadding" type="submit" [disabled]="!signupForm.valid" id="register">
+        Registreren
+      </button>
+    </div>
+  </form>
+  <div class="col-md-12">
+    <button class="btn btn-sport-blue btn-block bpadding" type="button" (click)="onClick()">Al geregistreerd? Log hier in!</button>
+
+  </div>
+</div>

@@ -1,0 +1,87 @@
+﻿@using SportUnite.BLL.Abstract
+@inject ISportComplexAccess ComplexAccess
+@model SportHallenViewModel
+
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Alle sporthallen van @ComplexAccess.GetSportComplex(Model.SportComplexId).Name</h3>
+	<h4>
+		@ComplexAccess.GetSportComplex(Model.SportComplexId).Address.Street
+		@ComplexAccess.GetSportComplex(Model.SportComplexId).Address.HouseNumber
+		@ComplexAccess.GetSportComplex(Model.SportComplexId).Address.City
+	</h4>
+	<a asp-action="SportComplex">Terug naar alle sportcomplexen</a>
+	<div class="row top">
+		<div class="col-lg-2">
+			<button class="blue-button" type="submit" onclick="location.href = '@Url.Action("AddHall", "SportComplex", Model)'"><i class="fa fa-plus" aria-hidden="true"></i> Nieuw</button>
+		</div>
+		<div class="col-lg-10">
+			<input type="text" id="SearchInput" onkeyup="search()" placeholder="Zoeken" class="form ">
+		</div>
+	</div>
+
+	@if (Model.SportHalls.Any())
+	{
+
+		<table class="table table-sm table-striped sporthallen" id="SearchTable">
+			<thead>
+				<tr>
+					<th>Naam</th>
+					<th>Minimale Capaciteit</th>
+					<th>Maximale Capaciteit</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var s in Model.SportHalls)
+				{
+					<div class="modal fade" id="confirm-delete_@s.HallId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Bevestiging verwijderen van @s.Name</h4>
+								</div>
+
+								<div class="modal-body">
+									<p>U probeert @s.Name uit de lijst van sporthallen te verwijderen.</p>
+									<p>Wilt u doorgaan met het verwijderen van @s.Name?</p>
+									<p class="debug-url"></p>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary confirm" data-dismiss="modal">Annuleer</button>
+									<a class="btn btn-danger btn-ok confirm" href="@Url.Action("DeleteHall", "SportComplex", new SportHallenViewModel { SportComplexId = Model.SportComplexId, SelectedHallId = s.HallId })">Verwijder @s.Name</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<tr>
+						<td class="main-table">@s.Name</td>
+						<td class="main-table">@s.CapacityMin</td>
+						<td class="main-table">@s.CapacityMax</td>
+						<td class="main-table"><button class="blue-button" onclick="location.href = '@Url.Action("SportAttribute", "SportComplex", new SportAttributesViewModel {SportHallId = s.HallId, SportComplexId = Model.SportComplexId})'">SPORTMATERIALEN</button></td>
+						<td class="main-table"><button class="blue-button" type="submit" onclick="location.href = '@Url.Action("UpdateHall", "SportComplex", new SportHallenViewModel {SportComplexId = Model.SportComplexId, SelectedHallId = s.HallId})'">WIJZIGEN</button></td>
+						<td class="main-table"><a href="#" data-toggle="modal" data-target="#confirm-delete_@s.HallId"><i class="fa fa-trash fa-3x icon-blue" aria-hidden="true"></i></a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<table class="table table-sm table-striped sporthallen">
+			<tbody>
+				<tr><td>Er is geen sporthal toegevoegd, om een sporthal toe te voegen klik op de nieuw knop.</td></tr>
+			</tbody>
+		</table>
+	}
+
+
+</div>

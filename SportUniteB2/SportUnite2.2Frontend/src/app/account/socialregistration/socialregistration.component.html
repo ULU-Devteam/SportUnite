@@ -1,0 +1,96 @@
+<div class="col-md-offset-2 row leftbg">
+  <h2 *ngIf="googleRegistration" class="text-center">Registreren met Google</h2>
+  <h2 *ngIf="facebookRegistration" class="text-center">Registreren met Facebook</h2>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group col-md-10">
+      <label for="name">Naam:</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        class="form-control"
+        placeholder="Naam">
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="age">Leeftijd:</label>
+      <input
+        type="number"
+        id="age"
+        formControlName="age"
+        class="form-control"
+        placeholder="Jaar"
+        min="0"
+        step="1">
+    </div>
+
+    <div class="help-block"
+         *ngIf="!signupForm.get('name').valid && signupForm.get('name').touched">
+      <p>Vul naam in!</p>
+    </div>
+    <div class="help-block"
+         *ngIf="!signupForm.get('age').valid && signupForm.get('age').touched">
+      <p>Vul leeftijd in!</p>
+    </div>
+
+    <div class="form-group col-md-12">
+      <label for="email">Email:</label>
+      <input
+        type="text"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        placeholder="Email">
+    </div>
+
+    <div class="help-block"
+         *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">
+      <p>Vul email in!</p>
+    </div>
+
+    <div class="form-group col-md-12">
+      <label for="city">Woonplaats:</label>
+      <input
+        type="text"
+        id="city"
+        formControlName="city"
+        class="form-control"
+        placeholder="Woonplaats">
+    </div>
+
+    <div class="help-block"
+         *ngIf="!signupForm.get('city').valid && signupForm.get('city').touched">
+      <p>Vul stad in!</p>
+    </div>
+
+
+    <div class="form-group col-md-12">
+      <label for="usernameR">Gebruikersnaam:</label>
+      <input
+        type="text"
+        id="usernameR"
+        formControlName="usernameR"
+        class="form-control"
+        placeholder="Gebruikersnaam">
+    </div>
+
+    <div class="help-block"
+         *ngIf="!signupForm.get('usernameR').valid && signupForm.get('usernameR').touched">
+      <p>Vul gebruikersnaam in!</p>
+    </div>
+    <div class="help-block"
+         *ngIf="usernameExist">
+      <p>Gebruikersnaam bestaat al.</p>
+    </div>
+
+    <div class="col-md-12">
+      <button class="btn btn-sport btn-block bpadding" [disabled]="!signupForm.valid" type="submit" id="register">
+        Registreren
+      </button>
+    </div>
+  </form>
+  <div class="col-md-12">
+    <button class="btn btn-sport btn-block bpadding" type="button" (click)="onLoginClick()">Log in</button>
+  </div>
+</div>

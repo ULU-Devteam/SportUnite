@@ -1,0 +1,17 @@
+﻿@model SportUnite.Domain.Models.Identity.LoginModel
+
+<h3 class="text-center">Log in met gebruikersnaam & wachtwoord</h3>
+<div class="text-danger" asp-validation-summary="All"></div>
+<form asp-action="Login" method="post">
+	<input type="hidden" asp-for="ReturnUrl" />
+	<div class="form-group">
+		<div><span asp-validation-for="Name" class="text-danger"></span></div>
+		<input asp-for="Name" placeholder="Naam" class="form-control" />
+	</div>
+	<div class="form-group">
+		<div><span asp-validation-for="Password" class="text-danger"></span></div>
+		<input asp-for="Password" placeholder="Wachtwoord" class="form-control" />
+	</div>
+	<button class="btn btn-primary login" type="submit">Log In</button>
+</form>
+<a href="#" class="text-blue">Wachtwoord vergeten?</a>

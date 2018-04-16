@@ -1,0 +1,43 @@
+﻿@model SportHallenViewModel
+
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Sporthal toevoegen </h3>
+	<a href="@Url.Action("Hall", "SportComplex", Model)">Terug naar alle sporthallen</a>
+
+	<form class="form-horizontal" asp-action="AddHall">
+		<fieldset>
+			@Html.HiddenFor(m => m.Hall.HallId)
+			@Html.HiddenFor(m => m.SportComplexId)
+			<div class="form-group edit-table-body">
+				<label asp-for="Hall.Name" class="col-md-4 edit-table-header">Naam sporthal: </label>
+				<div class="col-md-7">
+					<input asp-for="Hall.Name" placeholder="Naam" class="form-control input-md" required type="text">
+					<span asp-validation-for="Hall.Name"></span>
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label asp-for="Hall.CapacityMin" class="col-md-4 edit-table-header">Minimale Capaciteit: </label>
+				<div class="col-md-7">
+					<input asp-for="Hall.CapacityMin" placeholder="Minimale Capiciteit" class="form-control input-md" required type="number" min="0" step="1">
+					<span asp-validation-for="Hall.CapacityMin"></span>
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label asp-for="Hall.CapacityMax" class="col-md-4 edit-table-header">Maximale Capaciteit: </label>
+				<div class="col-md-7">
+					<input asp-for="Hall.CapacityMax" placeholder="Maximale Capaciteit" class="form-control input-md" required type="number" min="0" step="1">
+					<span asp-validation-for="Hall.CapacityMax"></span>
+				</div>
+			</div>
+		</fieldset>
+		<div class="text-center">
+			<button class="edit-table btn blue-button" type="submit">
+				TOEVOEGEN
+			</button>
+		</div>
+	</form>
+</div>

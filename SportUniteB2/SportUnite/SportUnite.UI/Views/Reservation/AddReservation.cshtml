@@ -1,0 +1,39 @@
+﻿@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Reserveringen toevoegen [naam] </h3>
+	<a asp-action="Reservation">Terug naar alle reserveringen</a>
+
+	<form class="form-horizontal">
+		<fieldset>
+
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header-reservation">Datum &amp; tijd: </label>
+				<div class="col-md-7">
+					<div class="form-group">
+						<div class="input-group date form_datetime" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+							<input class="form-control" size="16" type="text" value="" readonly>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+						</div>
+						<input type="hidden" id="dtp_input1" value="" /><br />
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header">Contactpersoon: </label>
+				<div class="col-md-7">
+					<input placeholder="naam" class="form-control input-md" required="">
+				</div>
+			</div>
+		</fieldset>
+		<div class="text-center">
+			<button class="edit-table btn blue-button" type="submit">
+				WIJZIGEN
+			</button>
+		</div>
+	</form>
+</div>

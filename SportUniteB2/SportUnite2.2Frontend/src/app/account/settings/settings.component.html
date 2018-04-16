@@ -1,0 +1,96 @@
+
+<div class="col-md-offset-2 col-md-8 row bluebg">
+
+    <h2 class="text-center">Instellingen</h2>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group col-md-10">
+        <label for="name">Naam:</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+          placeholder="Naam">
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="age">Leeftijd:</label>
+        <input
+          type="number"
+          id="age"
+          formControlName="age"
+          class="form-control"
+          placeholder="Jaar"
+          min="0"
+          step="1">
+      </div>
+
+      <div class="col-md-12"
+           *ngIf="!profileForm.get('name').valid && profileForm.get('name').touched">
+        <p>Vul naam in!</p>
+      </div>
+      <div class="col-md-12"
+           *ngIf="!profileForm.get('age').valid && profileForm.get('age').touched">
+        <p>Vul leeftijd in!</p>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label for="email">Email:</label>
+        <input
+          type="text"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Email">
+      </div>
+
+      <div class="col-md-12"
+           *ngIf="!profileForm.get('email').valid && profileForm.get('email').touched">
+        <p>Vul email in!</p>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label for="city">Woonplaats:</label>
+        <input
+          type="text"
+          id="city"
+          formControlName="city"
+          class="form-control"
+          placeholder="Woonplaats">
+      </div>
+
+      <div class="col-md-12"
+           *ngIf="!profileForm.get('city').valid && profileForm.get('city').touched">
+        <p>Vul stad in!</p>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label for="radius">Zoek radius</label>
+        <input
+          type="text"
+          id="radius"
+          formControlName="radius"
+          class="form-control"
+          placeholder="radius">
+      </div>
+
+      <div class="col-md-12"
+           *ngIf="!profileForm.get('radius').valid && profileForm.get('radius').touched">
+        <p>Vul radius in!</p>
+      </div>
+
+
+      <div class="col-md-3">
+        <button class="btn btn-success btn-block bpadding" type="button" [disabled]="!profileForm.valid" (click)="onSubmit()" id="edit">Wijzigingen
+          opslaan
+        </button>
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-danger btn-block bpadding" type="button" [disabled]="!profileForm.valid" (click)="onCancel()">Annuleren
+        </button>
+      </div>
+    </form>
+
+  </div>

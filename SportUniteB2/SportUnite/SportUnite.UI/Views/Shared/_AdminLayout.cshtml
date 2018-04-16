@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
+
+	<link href="~/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+	<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/Style.css" />
+	<link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="~/lib/jquery/dist/jquery-1.8.3.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap-datetimepicker.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap-datetimepicker.nl.js"></script>
+	<script src="~/js/site.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2">
+				<nav class="navbar navbar-fixed-top col-md-2" id="grey" role="navigation">
+					<div class="navbar-header page-scroll">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div><!-- END RESPONSIVE NAVBAR -->
+
+					<div class="collapse navbar-collapse navbar-ex1-collapse">
+						<h3 class="text-center blue">ADMINPANEL</h3>
+						<ul class="nav nav-admin">
+							@if (User.IsInRole("Administrator"))
+							{
+								<li>
+									<a asp-action="Dashboard" asp-controller="Admin"><i class="fa fa-home" aria-hidden="true"></i> Overzicht</a>
+								</li>
+								<li>
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse"><i class="fa fa-user" aria-hidden="true"></i> Beheer</a>
+									<div id="collapse" class="panel-collapse collapse">
+										<ul class="nav nav-admin-dropdown">
+											<li>
+												<a asp-action="SportComplex" asp-controller="SportComplex">Sportcomplexen</a>
+											</li>
+											<li>
+												<a asp-action="Sport" asp-controller="Sport">Sporten</a>
+											</li>
+											<li>
+												<a asp-action="Reservation" asp-controller="Reservation">Reserveringen</a>
+											</li>
+											<li>
+												<a asp-action="Event" asp-controller="Event">Evenementen</a>
+											</li>
+											<li data-toggle="collapse" data-target="#archief" class="collapsed active">
+												<a href="#">Archief <span class="caret"></span></a>
+											</li>
+
+											<li>
+												<ul class="nav nav-admin-dropdown collapse" id="archief">
+													<li><a asp-action="ArchiveSportComplex" asp-controller="Archive">Sportcomplexen</a></li>
+													<li>
+														<a asp-action="ArchiveHall" asp-controller="Archive">Sporthallen</a>
+													</li>
+													<li>
+														<a asp-action="ArchiveSportAttribute" asp-controller="Archive">Sportmaterialen</a>
+													</li>
+													<li>
+														<a asp-action="ArchiveSport" asp-controller="Archive">Sport</a>
+													</li>
+													<li>
+														<a asp-action="ArchiveReservation" asp-controller="Archive">Reserveringen</a>
+													</li>
+													<li>
+														<a asp-action="ArchiveEvent" asp-controller="Archive">Evenementen</a>
+													</li>
+													<li>
+														<a asp-action="ArchiveInvoice" asp-controller="Archive">Facturen</a>
+													</li>
+													<li><a asp-action="ArchiveOrder" asp-controller="Archive">Orders</a></li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<a asp-action="Invoice" asp-controller="Invoice"><i class="fa fa-file-text" aria-hidden="true"></i> Facturen</a>
+								</li>
+								<li>
+									<a asp-action="UserList" asp-controller="User"><i class="fa fa-users" aria-hidden="true"></i> Gebruikers</a>
+								</li>
+								<li>
+									<a asp-action="Log" asp-controller="Log"><i class="fa fa-file-archive-o" aria-hidden="true"></i> Log</a>
+								</li>
+								<li>
+									<a asp-action="Order" asp-controller="Order"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Order</a>
+								</li>
+								<li>
+									<a asp-action="Logout" asp-controller="Home"><i class="fa fa-sign-out" aria-hidden="true"></i> Log uit</a>
+								</li>
+							}
+							@if (!(User.IsInRole("Administrator")))
+							{
+								<li>
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse"><i class="fa fa-user" aria-hidden="true"></i> Beheer</a>
+									<div id="collapse" class="panel-collapse collapse in">
+										<ul class="nav nav-admin-dropdown">
+											<li>
+												<a asp-action="SportComplex" asp-controller="SportComplex">Sportcomplexen</a>
+											</li>
+											<li>
+												<a asp-action="Sport" asp-controller="Sport">Sporten</a>
+											</li>
+											<li>
+												<a asp-action="Reservation" asp-controller="Reservation">Reserveringen</a>
+											</li>
+											<li>
+												<a asp-action="Event" asp-controller="Event">Evenementen</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<a asp-action="Logout" asp-controller="Home"><i class="fa fa-sign-out" aria-hidden="true"></i>Log uit</a>
+								</li>
+							}
+
+						</ul>
+					</div>
+
+				</nav><!-- END NAV -->
+			</div>
+			<div class="col-md-10">
+				@RenderBody()
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(".btn-select").each(function () {
+				var value = $(this).find("ul li.selected").html();
+				if (value != undefined) {
+					$(this).find(".btn-select-input").val(value);
+					$(this).find(".btn-select-value").html(value);
+				}
+			});
+		});
+
+		$(document).on('click', '.btn-select', function (e) {
+			e.preventDefault();
+			var ul = $(this).find("ul");
+			if ($(this).hasClass("active")) {
+				if (ul.find("li").is(e.target)) {
+					var target = $(e.target);
+					target.addClass("selected").siblings().removeClass("selected");
+					var value = target.html();
+					$(this).find(".btn-select-input").val(value);
+					$(this).find(".btn-select-value").html(value);
+				}
+				ul.hide();
+				$(this).removeClass("active");
+			}
+			else {
+				$('.btn-select').not(this).each(function () {
+					$(this).removeClass("active").find("ul").hide();
+				});
+				ul.slideDown(300);
+				$(this).addClass("active");
+			}
+		});
+
+		$(document).on('click', function (e) {
+			var target = $(e.target).closest(".btn-select");
+			if (!target.length) {
+				$(".btn-select").removeClass("active").find("ul").hide();
+			}
+		});
+
+		$('.form_date').datetimepicker({
+			language: 'nl',
+			weekStart: 1,
+			todayBtn: 1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+		});
+
+		$('#confirm-delete').on('show.bs.modal', function (e) {
+			$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+
+			$('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+		});
+
+		//search
+		function search() {
+			// Declare variables
+			var td, i;
+			var input = document.getElementById("SearchInput");
+			var filter = input.value.toUpperCase();
+			var table = document.getElementById("SearchTable");
+			var tr = table.getElementsByTagName("tr");
+
+			// Loop through all table rows, and hide those who don't match the search query
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[0];
+				if (td) {
+					if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+	</script>
+
+</body>
+</html>

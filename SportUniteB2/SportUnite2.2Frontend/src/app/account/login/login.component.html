@@ -1,0 +1,73 @@
+
+  <div class="col-md-offset-2 col-md-8 row bluebg">
+
+    <h2 class="text-center">Inloggen</h2>
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group col-md-12">
+        <label for="username">Gebruikersnaam:</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-control"
+          placeholder="Gebruikersnaam">
+      </div>
+
+
+      <div class="col-md-12"
+
+           *ngIf="!signinForm.get('username').valid && signinForm.get('username').touched">
+        <p>Vul gebruikersnaam in!</p>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label for="password">Wachtwoord:</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          placeholder="Wachtwoord">
+      </div>
+
+
+      <div class="col-md-12"
+
+           *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched">
+        <p>Vul wachtwoord in!</p>
+
+      </div>
+
+      <div class="col-md-12"
+           *ngIf="wrongLogin">
+        <p>De ingevoerde gebruikersnaam of het wachtwoord is fout.</p>
+      </div>
+      <div class="col-md-12"
+           *ngIf="notExist">
+        <p>De ingevoerde gebruikersnaam bestaat niet.</p>
+      </div>
+      <div class="col-md-12"
+
+           *ngIf="otherError">
+        <p>Er is iets fouts gegaan met het inloggen.</p>
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-sport btn-block bpadding" type="submit" [disabled]="!signinForm.valid" id="login">Log
+          in
+        </button>
+      </div>
+    </form>
+
+    <div class="col-md-12">
+      <p class="center-block text-center ppadding">of</p>
+      <button class="btn btn-primary btn-block bpadding" type="button" id="facebookLogin" (click)="socialSignIn('facebook')">Inloggen met Facebook</button>
+    </div>
+
+    <div class="col-md-12">
+      <button class="btn btn-danger btn-block bpadding" type="button" id="googleLogin" (click)="socialSignIn('google')">Inloggen met Google</button>
+    </div>
+    <div class="col-md-12">
+      <button class="btn btn-sport btn-block bpadding" type="button" id="registreren" (click)="onClick()">Registreren</button>
+    </div>
+  </div>

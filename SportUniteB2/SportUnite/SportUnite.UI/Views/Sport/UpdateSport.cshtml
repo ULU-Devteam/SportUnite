@@ -1,0 +1,29 @@
+﻿@model SportUnite.Domain.Models.Sport
+
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Sport wijzigen @Model.Type </h3>
+	<a asp-action="Sport">Terug naar alle sporten</a>
+
+	<form class="form-horizontal" asp-action="UpdateSport" method="post">
+		@Html.HiddenFor(m => m.SportId, Model.SportId)
+		<fieldset>
+
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header" asp-for="Type">Naam sport: </label>
+				<div class="col-md-7">
+					<input value="@Model.Type" asp-for="Type" class="form-control input-md" required type="Text">
+					<span asp-validation-for="Type"></span>
+				</div>
+			</div>
+		</fieldset>
+		<div class="text-center">
+			<button class="edit-table btn blue-button" type="submit">
+				WIJZIGEN
+			</button>
+		</div>
+	</form>
+</div>

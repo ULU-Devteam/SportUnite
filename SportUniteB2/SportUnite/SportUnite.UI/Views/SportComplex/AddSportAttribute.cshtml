@@ -1,0 +1,55 @@
+﻿@using SportUnite.BLL.Abstract
+@inject ISportComplexAccess ComplexAccess
+@model SportAttributesViewModel
+
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Sportmateriaal toevoegen aan @ComplexAccess.GetHall(Model.SportHallId).Name </h3>
+	<a href="@Url.Action("SportAttribute", "SportComplex", Model)">Terug naar alle sportmaterialen</a>
+
+	<form class="form-horizontal" asp-action="AddSportAttribute">
+		@Html.HiddenFor(v => v.SportComplexId)
+		@Html.HiddenFor(v => v.SportHallId)
+		<fieldset>
+			<div class="form-group edit-table-body">
+				<label asp-for="NewAttribute.Name" class="col-md-4 edit-table-header">Naam: </label>
+				<div class="col-md-7">
+					<input placeholder="Name, i.e. Footballgoal" class="form-control input-md" required="" asp-for="NewAttribute.Name">
+					<span asp-validation-for="NewAttribute.Name"></span>
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label asp-for="NewAttribute.Type" class="col-md-4 edit-table-header">Type: </label>
+				<div class="col-md-7">
+					<input placeholder="Type, i.e. Goal" class="form-control input-md" required="" asp-for="NewAttribute.Type">
+					<span asp-validation-for="NewAttribute.Type"></span>
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label asp-for="NewAttribute.Sport" class="col-md-4 edit-table-header">Sporten: </label>
+				<div class="col-md-7">
+					<select asp-for="SportId" id="dates-field2" class="multiselect-ui form-control">
+						@foreach (var s in Model.Sports)
+						{
+							<option value="@s.SportId">@s.Type</option>
+						}
+					</select>
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header">Approved: </label>
+				<div class="col-md-7">
+					<input class="btn btn-default btn-group" type="checkbox" asp-for="NewAttribute.Approved" />
+				</div>
+			</div>
+		</fieldset>
+		<div class="text-center">
+			<button class="edit-table btn blue-button" type="submit">
+				WIJZIGEN
+			</button>
+		</div>
+	</form>
+</div>

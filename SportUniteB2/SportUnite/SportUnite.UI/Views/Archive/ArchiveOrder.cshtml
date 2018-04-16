@@ -1,0 +1,61 @@
+﻿@model OrderViewModel
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Archief orders</h3>
+	<div class="row">
+		<div class="col-lg-12">
+			<input type="text" id="SearchInput" onkeyup="search()" placeholder="Zoeken" class="form ">
+		</div>
+	</div>
+	<table class="table table-sm table-striped orderarchive">
+		@if (Model.Orders.Any())
+		{
+			<thead>
+				<tr>
+					<th>Beschrijving</th>
+					<th>Prijs</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var s in Model.Orders)
+                {
+					<div class="modal fade" id="confirm-delete_@s.OrderId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Bevestiging terugzetten van @s.Description</h4>
+								</div>
+
+								<div class="modal-body">
+									<p>U probeert @s.Description terug te zetten in de lijst met orders.</p>
+									<p>Wilt u doorgaan met het terugzetten van de order?</p>
+									<p class="debug-url"></p>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary confirm" data-dismiss="modal">Annuleer</button>
+									<a class="btn btn-danger btn-ok confirm" href="@Url.Action("RestoreOrder", "Archive", new OrderViewModel { SelectedOrderId = s.OrderId })" data-target="#confirm-delete">Terugzetten @s.Description</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<tr>
+						<td class="main-table">@s.Description</td>
+						<td class="main-table">&euro;@s.Cost</td>
+						<td class="main-table"><a href="#" data-toggle="modal" data-target="#confirm-delete_@s.OrderId"><i class="fa fa-repeat fa-3x icon-blue" aria-hidden="true"></i></a></td>
+					</tr>
+                }
+			</tbody>}
+		else
+		{
+			<tbody>
+				<tr><td>Er zijn nog geen orders gearchiveerd.</td></tr>
+			</tbody>}
+	</table>
+</div>

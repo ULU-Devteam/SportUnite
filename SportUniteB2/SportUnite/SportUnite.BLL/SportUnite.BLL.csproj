@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Halcyon" Version="2.5.1" />
+    <PackageReference Include="Halcyon.Mvc" Version="2.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SportUnite.DAL\SportUnite.DAL.csproj" />
+    <ProjectReference Include="..\SportUnite.Domain\SportUnite.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

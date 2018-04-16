@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="4.893000000000001" tests="13" failures="2">
+  <testsuite name="Root Suite" timestamp="2018-01-19T11:22:51" tests="0" failures="0" time="0">
+  </testsuite>
+  <testsuite name="Account test" timestamp="2018-01-19T11:22:51" tests="6" file="D:\SportUnite\SportUniteB2\SportUnite2.2Backend\test\account_test.js" failures="1" time="1.429">
+    <testcase name="Account test login" time="0.401" classname="login">
+    </testcase>
+    <testcase name="Account test GET request at /api/account returns a list of all users" time="0.155" classname="GET request at /api/account returns a list of all users">
+    </testcase>
+    <testcase name="Account test GET request at /api/account/:username returns a single user" time="0.102" classname="GET request at /api/account/:username returns a single user">
+    </testcase>
+    <testcase name="Account test POST request at /api/account returns the newly created user or an error if the username already exists" time="0.345" classname="POST request at /api/account returns the newly created user or an error if the username already exists">
+    </testcase>
+    <testcase name="Account test PUT request at api/account/:username returns the updated user" time="0.182" classname="PUT request at api/account/:username returns the updated user">
+      <failure><![CDATA[Error: expected 200 "OK", got 400 "Bad Request"
+    at Test._assertStatus (node_modules\supertest\lib\test.js:266:12)
+    at Test._assertFunction (node_modules\supertest\lib\test.js:281:11)
+    at Test.assert (node_modules\supertest\lib\test.js:171:18)
+    at Server.assert (node_modules\supertest\lib\test.js:131:12)
+    at emitCloseNT (net.js:1655:8)
+    at _combinedTickCallback (internal/process/next_tick.js:135:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)]]></failure>
+    </testcase>
+    <testcase name="Account test DELETE request at api/account/:username returns the deleted user" time="0.244" classname="DELETE request at api/account/:username returns the deleted user">
+    </testcase>
+  </testsuite>
+  <testsuite name="Events controller receiving" timestamp="2018-01-19T11:22:55" tests="4" file="D:\SportUnite\SportUniteB2\SportUnite2.2Backend\test\event_test.js" failures="1" time="2.6660000000000004">
+    <testcase name="Events controller receiving a POST request to /api/events creates an event" time="2.032" classname="a POST request to /api/events creates an event">
+      <failure><![CDATA[Error: Timeout of 2000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves.]]></failure>
+    </testcase>
+    <testcase name="Events controller receiving a PUT request to /api/event/:id updates an existing event" time="0.249" classname="a PUT request to /api/event/:id updates an existing event">
+    </testcase>
+    <testcase name="Events controller receiving a DELETE request to /api/event/:id deletes an existing event" time="0.108" classname="a DELETE request to /api/event/:id deletes an existing event">
+    </testcase>
+    <testcase name="Events controller receiving a POST request to /api/event/:id/join updates or creates an event" time="0.277" classname="a POST request to /api/event/:id/join updates or creates an event">
+    </testcase>
+  </testsuite>
+  <testsuite name="Account test" timestamp="2018-01-19T11:22:59" tests="3" file="D:\SportUnite\SportUniteB2\SportUnite2.2Backend\test\friends_test.js" failures="0" time="0.798">
+    <testcase name="Account test POST request at /api/account/:username/friends returns the added friend" time="0.125" classname="POST request at /api/account/:username/friends returns the added friend">
+    </testcase>
+    <testcase name="Account test GET request at /api/account/:username/friends returns a list of the users friends" time="0.268" classname="GET request at /api/account/:username/friends returns a list of the users friends">
+    </testcase>
+    <testcase name="Account test DELETE request at /api/account/:username/friends/:username unfriends and returns the unfriended friend" time="0.405" classname="DELETE request at /api/account/:username/friends/:username unfriends and returns the unfriended friend">
+    </testcase>
+  </testsuite>
+</testsuites>

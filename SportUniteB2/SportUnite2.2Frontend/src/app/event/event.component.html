@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+    <input #eventQuery type="text" class="form-control-1 col-md-9" placeholder="Zoek op events" (keyup)="onSearch(sport, sportcomplex, city, eventQuery.value)"/>
+    <div id="adv-search">
+      <div role="group">
+
+        <button type="button" class="btn btn-default dropdown-toggle pull-left" data-toggle="collapse"
+                data-parent="#accordion" href="#collapseTwo">Filteren op...  <span class="caret"></span>
+        </button>
+
+        <div class="input-group-1 pull-left">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span id="search_concept">Sorteren op...  </span><span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a (click)="sortByNameAsc()">Naam A-Z</a></li>
+            <li><a (click)="sortByNameDesc()">Naam Z-A</a></li>
+            <li><a *ngIf="allowed" (click)="sortByLocationFar()">Kilometer > </a></li>
+            <li><a *ngIf="allowed" (click)="sortByLocationNear()">Kilometer < </a></li>
+            <li class="divider"></li>
+            <li><a (click)="onShowAllEvents()">Alles laten zien</a></li>
+          </ul>
+
+          <input type="hidden" name="search_param" value="all" id="search_param">
+        </div>
+
+        <button
+          (click)="onSearch(sport, sportcomplex, city, eventQuery.value)"
+          type="button" class="btn btn-sport" >
+          <span class="glyphicon glyphicon-search"
+                aria-hidden="true"></span>
+        </button>
+
+        <div class="panel panel-default">
+          <div id="collapseTwo" class="panel-collapse collapse col-md-9">
+
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="sport" class="control-label">Sport</label>
+                <select
+                  class="form-control"
+                  id="sport"
+                  [(ngModel)]="sport">
+                  <option [ngValue]="undefined">Kies een sport</option>
+                  <option
+                    *ngFor="let sport of sports"
+                    [ngValue]="sport">{{sport.type}}</option>
+                </select>
+              </div>
+
+
+              <label for="sportcomplex">Sportcomplex</label>
+              <select
+                class="form-control"
+                id="sportcomplex"
+                [(ngModel)]="sportcomplex">
+                <option [ngValue]="undefined">Kies een complex</option>
+                <option *ngFor="let complex of sportComplexes" [ngValue]="complex">{{complex.name}}</option>
+              </select>
+              <br>
+              <label for="city">Stad</label>
+              <select
+                class="form-control"
+                id="city"
+                [(ngModel)]="city">
+                <option [ngValue]="undefined">Kies een stad</option>
+                <option *ngFor="let city of addresses" [ngValue]="city">{{city}}</option>
+              </select>
+              <br>
+              <button (click)="onShowAllEvents()" type="button" class="btn btn-sport">Alles laten zien</button>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+
+    <app-event-list></app-event-list>
+    </div>
+
+  </div>
+</div>
+

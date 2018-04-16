@@ -1,0 +1,64 @@
+﻿@model SportHallenViewModel
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Archief hallen</h3>
+	<div class="row">
+		<div class="col-lg-12">
+			<input type="text" id="SearchInput" onkeyup="search()" placeholder="Zoeken" class="form">
+		</div>
+	</div>
+
+	<table class="table table-sm table-striped sporthalarchive">
+		@if (Model.SportHalls.Any())
+		{
+			<thead>
+				<tr>
+					<th>Naam</th>
+					<th>Minimale Capaciteit</th>
+					<th>Maximale Capaciteit</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var s in Model.SportHalls)
+				{
+					<div class="modal fade" id="confirm-delete_@s.HallId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Bevestiging terugzetten van @s.Name</h4>
+								</div>
+
+								<div class="modal-body">
+									<p>U probeert de sporthal @s.Name terug te zetten in de lijst met sporthallen.</p>
+									<p>Wilt u doorgaan met het terugzetten van de sporthal?</p>
+									<p class="debug-url"></p>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary confirm" data-dismiss="modal">Annuleer</button>
+									<a class="btn btn-danger btn-ok confirm" href="@Url.Action("RestoreHall", "Archive", new SportHallenViewModel {SportComplexId = Model.SportComplexId, SelectedHallId = s.HallId})">Terugzetten @s.Name</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<tr>
+						<td class="main-table">@s.Name</td>
+						<td class="main-table">@s.CapacityMin</td>
+						<td class="main-table">@s.CapacityMax</td>
+						<td class="main-table"><a href="#" data-toggle="modal" data-target="#confirm-delete_@s.HallId"><i class="fa fa-repeat fa-3x icon-blue" aria-hidden="true"></i></a></td>
+					</tr>
+				}
+			</tbody>}
+		else
+		{
+			<tbody>
+				<tr><td>Er zijn nog geen hallen gearchiveerd.</td></tr>
+			</tbody>}
+	</table>
+</div>

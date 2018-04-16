@@ -1,0 +1,67 @@
+﻿@model InvoiceViewModel
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Archief facturen</h3>
+	<div class="row">
+		<div class="col-lg-12">
+			<input type="text" id="SearchInput" onkeyup="search()" placeholder="Zoeken" class="form ">
+		</div>
+	</div>
+	<table class="table table-sm table-striped archive" id="SearchTable">
+		@if (Model.Invoices.Any())
+		{
+			<thead>
+				<tr>
+					<th>Datum</th>
+					<th>Contactpersoon</th>
+					<th>Bedrag (inc.BTW.)</th>
+					<th>Bedrag (exc.BTW.)</th>
+					<th>Winst (%)</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var s in Model.Invoices)
+                {
+					<div class="modal fade" id="confirm-delete_@s.InvoiceId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Bevestiging terugzetten van factuur op naam @s.Name</h4>
+								</div>
+
+								<div class="modal-body">
+									<p>U probeert de factuur van @s.Name terug te zetten in de lijst met facturen.</p>
+									<p>Wilt u doorgaan met het terugzetten van de factuur?</p>
+									<p class="debug-url"></p>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary confirm" data-dismiss="modal">Annuleer</button>
+									<a class="btn btn-danger btn-ok confirm" href="@Url.Action("RestoreInvoice", "Archive", new InvoiceViewModel { SelectedInvoiceId = s.InvoiceId })" data-target="#confirm-delete">Terugzetten factuur </a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<tr>
+						<td class="main-table">@s.Date</td>
+						<td class="main-table">@s.Name</td>
+						<td class="main-table">@s.AmountExBtw</td>
+						<td class="main-table">@s.AmountInclBtw</td>
+						<td class="main-table">@s.Profit</td>
+						<td class="main-table"><a href="#" data-toggle="modal" data-target="#confirm-delete_@s.InvoiceId"><i class="fa fa-repeat fa-3x icon-blue" aria-hidden="true"></i></a></td>
+					</tr>
+                }
+			</tbody>}
+		else
+		{
+			<tbody>
+				<tr><td>Er zijn nog geen facturen gearchiveerd.</td></tr>
+			</tbody>}
+	</table>
+</div>

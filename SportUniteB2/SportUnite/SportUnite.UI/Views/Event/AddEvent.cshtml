@@ -1,0 +1,47 @@
+﻿@model EventSportViewModel
+
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Evenement toevoegen</h3>
+	<a asp-action="Event">Terug naar alle evenementen</a>
+
+	<form class="form-horizontal" asp-action="AddEvent">
+		<fieldset>
+			<div class="form-group edit-table-body">
+				<label asp-for="Event.Name" class="col-md-4 edit-table-header">Naam: </label>
+				<div class="col-md-7">
+					<span asp-validation-for="Event.Name"></span>
+					<input asp-for="Event.Name" placeholder="Naam" class="form-control input-md" required type="Text">
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label asp-for="Event.PeopleAmount" class="col-md-4 edit-table-header">Maximaal aantal personen: </label>
+				<div class="col-md-7">
+					<span asp-validation-for="Event.PeopleAmount"></span>
+					<input asp-for="Event.PeopleAmount" placeholder="Maximaal Aantal Personen" class="form-control input-md" required type="number" min="0" step="1">
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label asp-for="SportIds" class="col-md-4 edit-table-header">Sporten: </label>
+				<div class="col-md-7">
+					<span asp-validation-for="SportIds"></span>
+					<select asp-for="SportIds" id="dates-field2" class="multiselect-ui form-control" multiple="multiple">
+						@foreach (var s in Model.Sports)
+						{
+							<option value="@s.SportId">@s.Type</option>
+						}
+					</select>
+				</div>
+			</div>
+		</fieldset>
+
+		<div class="text-center">
+			<button class="edit-table btn blue-button" type="submit">
+				TOEVOEGEN
+			</button>
+		</div>
+	</form>
+</div>

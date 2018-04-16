@@ -1,0 +1,62 @@
+﻿@model SportUnite.Domain.Models.Identity.LoginModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <h3>Gebruiker toevoegen</h3>
+    <a asp-action="UserList">Terug naar alle gebruikers</a>
+    <form class="form-horizontal" asp-action="AddUser" method="post">
+        <fieldset>
+            <div class="form-group edit-table-body">
+                <label class="col-md-4 edit-table-header">Gebruikersnaam: </label>
+                <div class="col-md-7">
+                    <input placeholder="gebruikernaam" asp-for="Name" class="form-control input-md" required="">
+                    <span asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="form-group edit-table-body">
+                <label class="col-md-4 edit-table-header">Wachtwoord: </label>
+                <div class="col-md-7">
+                    <input placeholder="wachtwoord" asp-for="Password" class="form-control input-md" required="">
+                    <span asp-validation-for="Password"></span>
+                </div>
+            </div>
+            <div class="form-group edit-table-body">
+                <label class="col-md-4 edit-table-header">Emailadress: </label>
+                <div class="col-md-7">
+                    <input placeholder="email" asp-for="Email" class="form-control input-md" required="">
+                    <span asp-validation-for="Email"></span>
+                </div>
+            </div>
+            <div class="form-group edit-table-body">
+                <label class="col-md-4 edit-table-header">Telefoonnummer: </label>
+                <div class="col-md-7">
+                    <input placeholder="telefoon-nummer" asp-for="Phone" class="form-control input-md" required="">
+                    <span asp-validation-for="Phone"></span>
+                </div>
+            </div>
+            <div class="form-group edit-table-body">
+                <label class="col-md-4 edit-table-header">Rol: </label>
+                <div class="col-md-7">
+                    <a class="btn btn-warning btn-select btn-select-light">
+                        <input asp-for="Role" type="hidden" class="btn-select-input" />
+                        <span class="btn-select-value">Selecteer een rol</span>
+                        <span class="btn-select-arrow glyphicon glyphicon-chevron-down"></span>
+                        <ul>
+                            <li>Administrator</li>
+                            <li>ComplexManager</li>
+                        </ul>
+                        <span asp-validation-for="Role"></span>
+                    </a>
+                </div>
+            </div>
+        </fieldset>
+        <div class="text-center">
+            <button class="edit-table btn blue-button" type="submit">
+                TOEVOEGEN
+            </button>
+        </div>
+    </form>
+</div>

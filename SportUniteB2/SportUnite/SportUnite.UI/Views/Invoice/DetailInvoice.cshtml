@@ -1,0 +1,78 @@
+﻿@model SportUnite.Domain.Models.Invoice
+
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <h3>Factuur bekijken</h3>
+    <a asp-action="Invoice">Terug naar alle facturen</a>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="invoice-title">
+                <h2>Factuur</h2><h3 class="pull-right">Order #@Model.InvoiceId</h3>
+            </div>
+            <hr>
+            @if (Model.Address != null)
+            {
+                <div class="row">
+                    <div class="col-xs-6">
+                        <address>
+                            <strong>Factuur:</strong><br>
+                            @Model.Name<br>
+                            @Model.Address.Street
+                            @Model.Address.HouseNumber<br>
+                            @Model.Address.PostalCode @Model.Address.City
+                        </address>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <address>
+                            <strong>Datum:</strong><br>
+                            @Model.Date<br><br>
+                        </address>
+                    </div>
+                </div>}
+
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Overzicht</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><strong>Item</strong></td>
+                                    <td class="text-center"><strong>@Model.AmountInclBtw</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                <tr>
+                                    <td>Incusief btw</td>
+                                    <td class="text-center">@Model.AmountInclBtw</td>
+
+                                </tr>
+                                <tr>
+                                    <td>Exclusief Btw</td>
+                                    <td class="text-center">@Model.AmountExBtw</td>
+                                </tr>
+                                <tr>
+                                    <td>Winst</td>
+                                    <td class="text-center">@Model.Profit</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

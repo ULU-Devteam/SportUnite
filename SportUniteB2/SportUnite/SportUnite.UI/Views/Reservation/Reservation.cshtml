@@ -1,0 +1,67 @@
+﻿@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Reserveringen</h3>
+	<div class="row">
+		<div class="col-lg-2">
+			<form asp-action="AddReservation"><button class="blue-button" type="submit"><i class="fa fa-plus" aria-hidden="true"></i> Nieuw</button></form>
+		</div>
+		<div class="col-lg-10">
+			<input type="text" id="SearchInput" onkeyup="search()" placeholder="Zoeken" class="form ">
+		</div>
+	</div>
+	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Bevestiging verwijderen van </h4>
+				</div>
+
+				<div class="modal-body">
+					<p>U probeert  uit de lijst van reservering te verwijderen.</p>
+					<p>Wilt u doorgaan met het verwijderen van ?</p>
+					<p class="debug-url"></p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary confirm" data-dismiss="modal">Annuleer</button>
+					<a class="btn btn-danger btn-ok confirm" href="#" data-target="#confirm-delete">Verwijder </a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<table class="table table-sm table-striped reservations" id="SearchTable">
+		<thead>
+			<tr>
+				<th>Datum &amp; Tijd</th>
+				<th>Contactpersoon</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="main-table">Datum &amp; Tijd</td>
+				<td class="main-table">Contactpersoon</td>
+				<td class="main-table">
+					<form asp-action="Invoice" asp-controller="Invoice"><button class="blue-button" type="submit">FACTUUR</button></form>
+				</td>
+				<td class="main-table">
+					<form asp-action="Event" asp-controller="Event"><button class="blue-button" type="submit">EVENEMENT</button></form>
+				</td>
+				<td class="main-table">
+					<form asp-action="UpdateReservation"><button class="blue-button" type="submit">WIJZIGEN</button></form>
+				</td>
+				<td class="main-table"><a href="#" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash fa-3x icon-blue" aria-hidden="true"></i></a></td>
+			</tr>
+
+		</tbody>
+	</table>
+
+</div>

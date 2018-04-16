@@ -1,0 +1,18 @@
+<a style="cursor: pointer;" class="list-group-item clearfix">
+  <div class="col-md-10" (click)="onUserClicked()">
+    <div class="row">
+      <h4>Gebruikersnaam: {{ user.username }}</h4>
+    </div>
+    <div class="row">
+      <p>Leeftijd: {{ user.age }}</p>
+      <p>Stad: {{ user.city }}</p>
+    </div>
+  </div>
+  <div class="col-md-2 btn-bottom">
+
+    <button class="btn btn-block" disabled *ngIf="isFriend == 0">Niet Beschikbaar</button>
+    <button class="btn btn-success btn-block" (click)="onAddFriend()" *ngIf="isFriend == -1">Toevoegen als vriend</button>
+    <button class="btn btn-danger btn-block" (click)="onRemoveFriend()" *ngIf="isFriend == 1">Verwijderen als vriend</button>
+
+  </div>
+</a>

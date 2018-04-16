@@ -1,0 +1,20 @@
+<div id="loading" *ngIf="!loaded">
+  <ul class="bokeh">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+<p *ngIf="error">er is iets fout gegaan</p>
+
+<div *ngIf="events?.length > 0; else noEvents">
+  <app-event-list-item
+    *ngFor="let e of events; let i = index"
+    [event]="e"
+    [index]="i"></app-event-list-item>
+
+
+      <p  *ngIf="noEvents">Er zijn geen events gevonden!</p>
+
+</div>

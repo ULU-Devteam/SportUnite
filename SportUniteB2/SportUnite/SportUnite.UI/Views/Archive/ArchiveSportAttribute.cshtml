@@ -1,0 +1,73 @@
+﻿@model SportAttributesViewModel
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Archief sportmaterialen</h3>
+	<div class="row">
+		<div class="col-lg-12">
+			<input type="text" id="SearchInput" onkeyup="search()" placeholder="Zoeken" class="form ">
+		</div>
+	</div>
+	<table class="table table-sm table-striped sportattributearchive" id="SearchTable">
+		@if (Model.Attributes.Any())
+		{
+			<thead>
+				<tr>
+					<th>Naam</th>
+					<th>Type</th>
+					<th>Sport</th>
+					<th>Approved</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var s in Model.Attributes)
+                {
+					<div class="modal fade" id="confirm-delete_@s.SportAttributeId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Bevestiging terugzetten van @s.Name van sport @s.Sport.Type</h4>
+								</div>
+
+								<div class="modal-body">
+									<p>U probeert @s.Name terug te zetten in de lijst met sportmaterialen.</p>
+									<p>Wilt u doorgaan met het terugzetten van de sportmaterialen?</p>
+									<p class="debug-url"></p>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary confirm" data-dismiss="modal">Annuleer</button>
+									<a class="btn btn-danger btn-ok confirm" href="@Url.Action("RestoreSportAttribute", "Archive", new SportAttributesViewModel { SelectedSportAttributeId = s.SportAttributeId})">Terugzetten @s.Name</a>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<tr>
+						<td class="main-table">@s.Name</td>
+						<td class="main-table">@s.Type</td>
+						<td class="main-table">@s.Sport.Type</td>
+						@if (s.Approved)
+                    {
+							<td class="main-table"><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></td>
+						}
+						else
+						{
+							<td class="main-table"><i class="glyphicon glyphicon-remove remove" aria-hidden="true"></i></td>
+						}
+						<td class="main-table"><a href="#" data-toggle="modal" data-target="#confirm-delete_@s.SportAttributeId"><i class="fa fa-repeat fa-3x icon-blue" aria-hidden="true"></i></a></td>
+					</tr>
+                }
+			</tbody>}
+		else
+		{
+			<tbody>
+				<tr><td>Er zijn nog geen sportmaterialen gearchiveerd.</td></tr>
+			</tbody>}
+	</table>
+</div>

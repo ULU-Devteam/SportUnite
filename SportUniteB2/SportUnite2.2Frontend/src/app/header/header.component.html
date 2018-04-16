@@ -1,0 +1,95 @@
+<nav class="navbar navbar-default bs-dark">
+
+  <div class="navbar-header  col-lg-offset-2">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" routerLink="account/login" *ngIf="!loggedIn"><img src="../../assets/logo.png" class="icon"/></a>
+    <a class="navbar-brand" routerLink="events" *ngIf="loggedIn"><img src="../../assets/logo.png" class="icon"/></a>
+  </div>
+
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav" *ngIf="loggedIn">
+      <li class="dropdown" routerLinkActive="active">
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+           aria-haspopup="true" aria-expanded="false" id="dropdownevent" routerLink="events">
+          Events
+        </a>
+        <ul class="dropdown-menu">
+          <li routerLinkActive="active"><a routerLink="events/new">Event maken</a></li>
+        </ul>
+      </li>
+      <li routerLinkActive="active"><a routerLink="users">Gebruikers</a></li>
+    </ul>
+
+
+
+    <ul class="nav navbar-nav navbar-right">
+
+      <li *ngIf="loggedIn && unread > 0">
+        <a>
+          <span style="color: #de6a0d">{{unread}} ongelezen notificatie</span>
+        </a>
+      </li>
+
+      <li class="dropdown" routerLinkActive="active" *ngIf="loggedIn">
+        <a class="dropdown-toggle-1" role="button"
+           aria-haspopup="true" aria-expanded="false" appNotification id="notification" (click)="onClickNotifications()">
+          <div>{{notificationButton}}</div>
+        </a>
+        <ul class="dropdown-menu notify-drop">
+          <div class="notify-drop-title">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6">Notificatie(s) (<b>{{unread}}</b> nieuw)</div>
+            </div>
+          </div>
+          <!-- end notify title -->
+          <!-- notify content -->
+          <div class="drop-content">
+            <li *ngFor="let not of notifications; let i = index" (click)="onNotificationClick(not)" style="cursor: pointer">
+              <a class="text-white">
+              <div class="col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-md-10 col-sm-9 col-xs-9 pd-l0">
+                  <div *ngIf="not.read === false">
+                    <h5><b>{{not.sender}} heeft je uitgenodigd voor een evenement</b></h5>
+                    <p><b>{{not.message}}</b></p>
+                  </div>
+                  <div *ngIf="not.read === true">
+                    <h5>{{not.sender}} heeft je uitgenodigd voor een evenement</h5>
+                    <p>{{not.message}}</p>
+                  </div>
+              </div>
+              </a>
+            </li>
+          </div>
+          <a style="cursor: pointer;" class="text-no-dec">
+          <div class="notify-drop-footer text-center">
+            <a (click)="onReadAllClick()"><i class="fa fa-eye"></i> Markeer alles als gelezen</a>
+          </div>
+          </a>
+        </ul>
+      </li>
+
+      <li class="dropdown" routerLinkActive="active">
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+           aria-haspopup="true" aria-expanded="false" id="dropdown">
+          Account
+        </a>
+        <ul class="dropdown-menu">
+          <li><a routerLink="account/login" style="cursor:pointer;" *ngIf="!loggedIn">Aanmelden</a></li>
+          <li><a routerLink="account/registration" style="cursor:pointer;" *ngIf="!loggedIn">Registreren</a></li>
+          <li><a routerLink="account/profile" style="cursor:pointer;" *ngIf="loggedIn">Profiel</a></li>
+          <li role="separator" class="divider" *ngIf="loggedIn"></li>
+          <li><a routerLink="account/settings" style="cursor:pointer;" *ngIf="loggedIn">Instellingen</a></li>
+          <li><a (click)="onLogout()" style="cursor:pointer;" *ngIf="loggedIn">Uitloggen</a></li>
+
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+</nav>

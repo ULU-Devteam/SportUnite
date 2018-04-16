@@ -1,0 +1,20 @@
+<a *ngIf="inRadius"
+  style="cursor: pointer;"
+  (click)="onEventClicked()">
+  <div class="col-md-4">
+    <div class="orangebg prow">
+      <h2 class="text-white">{{ event?.name }}</h2>
+    </div>
+
+    <div class="whitebg prow">
+      <p class="text-blue">Naam van de sportcomplex: </p> <p>{{ event?.sportcomplex.name }}</p>
+      <p class="text-blue">Adres van de sportcomplex: </p> <p>{{ street }}</p><p>{{ postalCode }}</p>
+      <p class="text-blue">Aantal personen die mee kunnen doen: <span class="text-black">{{ event?.peopleAmount }}</span></p>
+      <p class="text-blue">Mensen die zich hebben aangemeld: <span class="text-black">{{ event.usernames.length }}</span></p>
+      <p *ngIf="allowed" class="text-blue">Afstand van u vandaan (km): <span *ngIf="allowed"  class="text-black">{{displayDistance}} km</span></p>
+      <p class="text-blue">Sport die gespeeld wordt:
+      <span *ngFor="let s of event.sports" class="text-black">{{ s?.type }}</span> </p>
+
+    </div>
+  </div>
+</a>

@@ -1,0 +1,22 @@
+<div id="loading" *ngIf="!loaded">
+  <ul class="bokeh">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div *ngIf="friends?.length > 0; else noUsers">
+    <app-friend-list-item *ngFor="let friendEl of friends; let i = index" [friend]="friendEl" [index]="i"></app-friend-list-item>
+    </div>
+    <ng-template #noUsers>
+      <div><br>
+        <p>Vriendenlijst is leeg! Om vrienden te worden ga naar de pagina <a routerLink="/users" class="text-white">Gebruikers</a></p>
+
+      </div>
+    </ng-template>
+  </div>
+</div>
+

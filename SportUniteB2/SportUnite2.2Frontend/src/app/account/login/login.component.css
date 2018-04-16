@@ -1,0 +1,16 @@
+.ppadding{
+  font-size:20px;
+  padding:10px;
+}
+
+h1, h2, label{
+  color:white;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched,
+input.ng-invalid.ng-dirty,
+textarea.ng-invalid.ng-dirty{
+  border: 1px solid red;
+}
+

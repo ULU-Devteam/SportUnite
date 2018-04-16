@@ -1,0 +1,63 @@
+﻿@model SportAttributesViewModel
+
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+
+	<h3>@Model.NewAttribute.Name wijzigen</h3>
+	<a href="@Url.Action("SportAttribute", "SportComplex", Model)">Terug naar alle sportmaterialen</a>
+
+	<form class="form-horizontal" asp-action="UpdateSportAttribute">
+		@Html.HiddenFor(h => h.SportHallId)
+		@Html.HiddenFor(h => h.SportComplexId)
+		@Html.HiddenFor(h => h.NewAttribute.SportAttributeId)
+		@Html.HiddenFor(h => h.SelectedSportAttributeId)
+		<fieldset>
+			<div class="form-group edit-table-body">
+				<label asp-for="NewAttribute.Name" class="col-md-4 edit-table-header">Naam: </label>
+				<div class="col-md-7">
+					<input placeholder="Name" class="form-control input-md" required="" asp-for="NewAttribute.Name">
+					<span asp-validation-for="NewAttribute.Name"></span>
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label asp-for="NewAttribute.Type" class="col-md-4 edit-table-header">Type: </label>
+				<div class="col-md-7">
+					<input placeholder="Type" class="form-control input-md" required="" asp-for="NewAttribute.Type">
+					<span asp-validation-for="NewAttribute.Type"></span>
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label asp-for="NewAttribute.Sport" class="col-md-4 edit-table-header">Sporten: </label>
+				<div class="col-md-7">
+					<select asp-for="SportId" id="dates-field2" class="multiselect-ui form-control">
+						@foreach (var s in Model.Sports)
+						{
+							if (s.SportId == Model.NewAttribute.Sport.SportId)
+							{
+								<option selected="selected" value="@s.SportId">@s.Type</option>
+							}
+							else
+							{
+								<option value="@s.SportId">@s.Type</option>
+							}
+						}
+					</select>
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header">Approved: </label>
+				<div class="col-md-7">
+					<input class="btn btn-default btn-group" type="checkbox" asp-for="NewAttribute.Approved" />
+				</div>
+			</div>
+		</fieldset>
+		<div class="text-center">
+			<button class="edit-table btn blue-button" type="submit">
+				WIJZIGEN
+			</button>
+		</div>
+	</form>
+</div>

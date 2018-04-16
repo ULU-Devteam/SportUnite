@@ -1,0 +1,67 @@
+﻿@model SportUnite.Domain.Models.Invoice
+
+@{
+	Layout = "_AdminLayout";
+}
+
+<div class="row">
+	<h3>Factuur wijzigen</h3>
+	<a asp-action="Invoice">Terug naar alle facturen</a>
+
+	<form class="form-horizontal" asp-action="UpdateInvoicePost" method="post">
+		<fieldset>
+
+			@Html.HiddenFor(a => a.Address);
+			@Html.HiddenFor(a => a.BankAccountsInvoices);
+			@Html.HiddenFor(a => a.Btw);
+			@Html.HiddenFor(a => a.Reservation);
+			@Html.HiddenFor(a => a.Date);
+			@Html.HiddenFor(a => a.Address);
+			@Html.HiddenFor(a => a.InvoiceId);
+
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header">Datum: </label>
+				<div class="col-md-7">
+					<div class="form-group">
+						<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+							<input class="form-control" size="16" type="text" value="" readonly asp-for="Date">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+						</div>
+						<input type="hidden" id="dtp_input2" value="" /><br />
+					</div>
+
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header">Contactpersoon: </label>
+				<div class="col-md-7">
+					<input placeholder="@Model.Name" asp-for="Name" class="form-control input-md" required="">
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header">Bedrag (inc.BTW.): </label>
+				<div class="col-md-7">
+					<input placeholder="@Model.AmountInclBtw" class="form-control input-md" required="" asp-for="AmountInclBtw">
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header">Bedrag (exc.BTW.): </label>
+				<div class="col-md-7">
+					<input placeholder="@Model.AmountExBtw" class="form-control input-md" required="" asp-for="AmountExBtw">
+				</div>
+			</div>
+			<div class="form-group edit-table-body">
+				<label class="col-md-4 edit-table-header">Winst (%): </label>
+				<div class="col-md-7">
+					<input placeholder="@Model.Profit" asp-for="Profit" class="form-control input-md" required="">
+				</div>
+			</div>
+		</fieldset>
+		<div class="text-center">
+			<button class="edit-table btn blue-button" type="submit">
+				WIJZIGEN
+			</button>
+		</div>
+	</form>
+</div>

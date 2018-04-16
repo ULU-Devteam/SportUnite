@@ -1,0 +1,21 @@
+<div id="loading" *ngIf="!loaded">
+  <ul class="bokeh">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+
+<div class="input-group col-md-12">
+  <input type="search" class="form-control" placeholder="Zoek op gebruikersnaam" #filter id="search" (keyup)="filterList(filter.value)"/>
+
+  <span class="input-group-btn" >
+            <button class="btn btn-sport-blue" type="button" (click)="filterList(filter.value)" >
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+</div>
+<p *ngIf="error">Er is iets fout gegaan</p>
+<app-user-list-item *ngFor="let userEl of users; let i = index" [user]="userEl" [index]="i"></app-user-list-item>
+

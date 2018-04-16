@@ -1,0 +1,28 @@
+﻿@model SportUnite.Domain.Models.Sport
+
+@{
+    Layout = "_SidebarLayout";
+}
+
+<div class="row">
+    <h3>Sport toevoegen </h3>
+    <a asp-action="Sport">Terug naar alle sporten</a>
+
+    <form class="form-horizontal" asp-action="AddSport">
+        <fieldset>
+
+            <div class="form-group edit-table-body">
+                <label class="col-md-4 edit-table-header" asp-for="Type">Naam sport: </label>
+                <div class="col-md-7">
+                    <input placeholder="Sport" class="form-control input-md" asp-for="Type" required type="Text">
+                    <span asp-validation-for="Type"></span>
+                </div>
+            </div>
+        </fieldset>
+        <div class="text-center">
+            <button class="edit-table btn blue-button" type="submit">
+                TOEVOEGEN
+            </button>
+        </div>
+    </form>
+</div>

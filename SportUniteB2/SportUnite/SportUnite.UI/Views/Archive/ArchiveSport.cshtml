@@ -1,0 +1,59 @@
+﻿@model SportViewModel
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Archief sporten</h3>
+	<div class="row">
+		<div class="col-lg-12">
+			<input type="text" id="SearchInput" onkeyup="search()" placeholder="Zoeken" class="form ">
+		</div>
+	</div>
+	<table class="table table-sm table-striped sportenarchive" id="SearchTable">
+		@if (Model.Sports.Any())
+		{
+			<thead>
+				<tr>
+					<th>Naam</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var s in Model.Sports)
+                {
+					<div class="modal fade" id="confirm-delete_@s.SportId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Bevestiging terugzetten van @s.Type</h4>
+								</div>
+
+								<div class="modal-body">
+									<p>U probeert @s.Type terug te zetten in de lijst met sporten.</p>
+									<p>Wilt u doorgaan met het terugzetten van de sport?</p>
+									<p class="debug-url"></p>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary confirm" data-dismiss="modal">Annuleer</button>
+									<a class="btn btn-danger btn-ok confirm" href="@Url.Action("RestoreSport", "Archive", new SportViewModel { SelectedSportId = s.SportId})" data-target="#confirm-delete">Terugzetten @s.Type</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<tr>
+						<td class="main-table">@s.Type</td>
+						<td class="main-table"><a href="#" data-toggle="modal" data-target="#confirm-delete_@s.SportId"><i class="fa fa-repeat fa-3x icon-blue" aria-hidden="true"></i></a></td>
+					</tr>
+                }
+			</tbody>}
+		else
+		{
+			<tbody>
+				<tr><td>Er zijn nog geen sporten gearchiveerd.</td></tr>
+			</tbody>}
+	</table>
+</div>

@@ -1,0 +1,17 @@
+<a style="cursor: pointer;">
+  <div class="col-md-12 text-white">
+
+    <div class="row">
+      <h3>{{ friend.name }}</h3>
+    </div>
+    <div class="row">
+      <p>{{ friend.age }}</p>
+      <p>{{ friend.city }}</p>
+    </div>
+
+    <button class="btn  btn-block" disabled *ngIf="isFriend == 0">Niet Beschikbaar</button>
+
+    <button class="btn btn-danger btn-block" (click)="onRemoveFriend()" *ngIf="isFriend == 1">Verwijderen als vriend</button>
+    <button class="btn btn-success btn-block" (click)="onAddFriend()" *ngIf="isFriend == -1">Toevoegen als vriend</button>
+  </div>
+</a>

@@ -1,0 +1,9 @@
+h1, h2, label, p {
+  color:white;
+}
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched,
+input.ng-invalid.ng-dirty,
+textarea.ng-invalid.ng-dirty{
+  border: 1px solid red;
+}

@@ -1,0 +1,97 @@
+<div class="col-md-12">
+<div class="container">
+  <div class="row">
+
+
+    <div class="col-md-offset-2 col-md-8 formbg">
+
+      <h2 class="text-center">Evenement maken</h2>
+      <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="name">Naam:</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="form-control"
+            placeholder="Naam">
+        </div>
+
+        <div class="help-block"
+             *ngIf="!eventForm.get('name').valid && eventForm.get('name').touched">
+          <p>Vul naam in!</p>
+        </div>
+
+        <div class="form-group">
+          <label for="persons">Aantal personen:</label>
+          <input
+            type="number"
+            id="persons"
+            formControlName="persons"
+            class="form-control"
+            placeholder="Nr."
+            min="2"
+            step="1"
+            aria-valuemin="2">
+        </div>
+
+        <div class="help-block"
+             *ngIf="!eventForm.get('persons').valid && eventForm.get('persons').touched">
+          <p>Vul de aantal personen in!</p>
+        </div>
+
+        <div class="help-block"
+             *ngIf="minValue && eventForm.get('persons').dirty">
+          <p>Minimaal 2 personen moeten ingevuld worden.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Datum:</label>
+          <input
+            type="datetime-local"
+            id="date"
+            formControlName="date"
+            class="form-control">
+        </div>
+
+        <div class="help-block"
+             *ngIf="!eventForm.get('date').valid && eventForm.get('date').touched">
+          <p>Vul datum en tijd in!</p>
+        </div>
+
+        <div class="form-group">
+          <label for="sport">Sportcomplexen:</label>
+          <select class="form-control" id="sportcomplexes" formControlName="sportcomplexes"
+                  placeholder="Kies sportcomplex">
+            <option *ngFor="let complex of sportComplexes" [ngValue]="complex">{{complex.name}}</option>
+          </select>
+        </div>
+
+        <div class="help-block"
+             *ngIf="!eventForm.get('sportcomplexes').valid && eventForm.get('sportcomplexes').touched">
+          <p>Selecteer een sportcomplex!</p>
+        </div>
+
+        <div class="form-group">
+          <label for="sport">Sporten:</label>
+          <select class="form-control" id="sport" formControlName="sport" placeholder="Kies sport">
+            <option *ngFor="let sport of sports" [ngValue]="sport">{{sport.type}}</option>
+          </select>
+        </div>
+
+        <div class="help-block"
+             *ngIf="!eventForm.get('sport').valid && eventForm.get('sport').touched">
+          <p>Selecteer sport(en)!</p>
+        </div>
+
+        <button class="btn btn-sport btn-block bpadding" type="submit" [disabled]="submitted || !eventForm.valid"
+                id="newEvent">Evenement aanmaken
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+

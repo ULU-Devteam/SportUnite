@@ -1,0 +1,81 @@
+﻿@model SportViewModel
+
+@{
+	Layout = "_SidebarLayout";
+}
+
+<div class="row">
+	<h3>Sporten</h3>
+	<div class="row">
+		<div class="col-lg-2">
+			<form asp-action="AddSport" method="get">
+				<button class="blue-button" type="submit"><i class="fa fa-plus" aria-hidden="true"></i> Nieuw</button>
+			</form>
+		</div>
+		<div class="col-lg-10">
+			<input type="text" id="SearchInput" onkeyup="search()" placeholder="Zoeken" class="form ">
+		</div>
+	</div>
+	@if (Model.Sports.Any())
+	{
+		<div page-model="@Model.PagingViewModel" page-action="Sport" page-classes-enabled="true"
+			 page-class="btn" page-class-normal="btn-default"
+			 page-class-selected="btn-primary" class="btn-group pull-left pagination">
+		</div>
+		<table class="table table-sm table-striped sporten" id="SearchTable">
+
+			<thead>
+				<tr>
+					<th>Naam</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var s in Model.Sports)
+				{
+					<div class="modal fade" id="confirm-delete_@s.SportId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Bevestiging verwijderen van @s.Type</h4>
+								</div>
+
+								<div class="modal-body">
+									<p>U probeert @s.Type uit de lijst van sporten te verwijderen.</p>
+									<p>Wilt u doorgaan met het verwijderen van @s.Type?</p>
+									<p class="debug-url"></p>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary confirm" data-dismiss="modal">Annuleer</button>
+									<a class="btn btn-danger btn-ok confirm" href="@Url.Action("DeleteSport", "Sport", s)" data-target="#confirm-delete">Verwijder @s.Type</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<tr>
+						<td class="main-table">@s.Type</td>
+						<td class="main-table"><button class="blue-button" method="get" onclick="location.href = '@Url.Action("UpdateSport", "Sport", new {id = s.SportId})'">WIJZIGEN</button></td>
+						<td class="main-table"><a href="#" data-toggle="modal" data-target="#confirm-delete_@s.SportId"><i class="fa fa-trash fa-3x icon-blue" aria-hidden="true"></i></a></td>
+					</tr>
+
+
+				}
+
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<table class="table table-sm table-striped sporten">
+			<tbody>
+				<tr><td>Er is geen sport toegevoegd, om een sport toe te voegen klik op de nieuw knop.</td></tr>
+			</tbody>
+		</table>
+	}
+
+</div>
